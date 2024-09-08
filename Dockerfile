@@ -1,5 +1,5 @@
 # 使用Node.js镜像构建Vue项目
-FROM node:16 AS build-stage
+FROM node:latest
 
 # 设置工作目录
 WORKDIR /app
