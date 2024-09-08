@@ -9,6 +9,7 @@ WORKDIR /app
 
 # 复制项目文件a'd's
 COPY package*.json ./
+RUN echo "当前npm版本：" && npm --version
 RUN npm i --lockfile-version 3 --package-lock-only
 COPY . .
 
