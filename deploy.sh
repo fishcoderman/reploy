@@ -32,7 +32,7 @@ fi
 
 # 构建 Docker 镜像
 echo "Building Docker image..."
-echo "pwd" pwd
+echo "当前目录是: $(pwd)"
 cat ./Dockerfile
 docker build -t $IMAGE_NAME:latest -f ./Dockerfile .
 
