@@ -1,26 +1,32 @@
-# 使用 Node.js 作为基础镜像
-FROM node:12 AS build
-
-# 设置npm的源
-RUN npm config set registry https://registry.npm.taobao.org
+# 使用Node.js镜像构建Vue项目
+FROM node:16 AS build-stage
 
 # 设置工作目录
 WORKDIR /app
 
-# 复制项目文件
+# 复制package.json和package-lock.json
 COPY package*.json ./
-RUN echo "当前npm版本：" && npm --version
-RUN npm install --legacy-peer-deps
+
+# 安装项目依赖
+RUN npm install
+
+# 复制项目文件
 COPY . .
 
-# 构建前端资源
+# 构建Vue项目
 RUN npm run build
 
-# 使用 Nginx 作为生产环境服务器
+# 使用Nginx镜像提供静态文件
 FROM nginx:alpine
 
-# 复制构建结果到 Nginx
-COPY --from=build /app/dist /usr/share/nginx/html
+# 复制构建结果到Nginx的html目录
+COPY --from=build-stage /app/dist /usr/share/nginx/html
 
-# 暴露端口
+# 复制nginx配置文件（可选）
+# COPY nginx.conf /etc/nginx/nginx.conf
+
+# 暴露Nginx的80端口
 EXPOSE 80
+
+# 启动Nginx
+CMD ["nginx", "-g", "daemon off;"]
