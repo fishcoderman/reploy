@@ -2,19 +2,16 @@
 FROM node:16 AS build-stage
 
 # 设置npm源（例如使用淘宝源）
-ENV NPM_CONFIG_REGISTRY=https://registry.npm.taobao.org
-
-# 安装pnpm
-RUN npm install -g pnpm
+RUN npm config set registry https://registry.npmmirror.com/
 
 # 设置工作目录
 WORKDIR /app
 
 # 复制package.json和package-lock.json
-COPY package*.json ./
+COPY package.json .
 
 # 安装项目依赖
-RUN pnpm install
+RUN npm install
 
 # 复制项目文件
 COPY . .
