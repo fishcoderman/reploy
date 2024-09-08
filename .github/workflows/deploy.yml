@@ -1,0 +1,40 @@
+name: Deploy to Aliyun
+
+on:
+  push:
+    branches:
+      - main  # 或者您希望部署的其他分支
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: LIST PWD1
+        run: pwd
+
+      - name: List files
+        run: ls -la
+
+      - name: Make deploy.sh executable
+        run: chmod +x $GITHUB_WORKSPACE/deploy_his.sh
+
+
+      - name: LIST PWD31
+        run: pwd
+        
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}  # 使用你的 SSH 私钥
+
+      - name: Add Aliyun IP to known_hosts
+        run: |
+          ssh-keyscan -H ${{ secrets.ALICLOUD_IP }} >> ~/.ssh/known_hosts
+  
+      - name: Verify SSH connection
+        run: |
+           ssh ${{ secrets.ALICLOUD_USER }}@${{ secrets.ALICLOUD_IP }} 'bash -s' < $GITHUB_WORKSPACE/deploy_his.sh
