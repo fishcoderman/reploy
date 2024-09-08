@@ -19,12 +19,8 @@ jobs:
       - name: List files
         run: ls -la
 
-      - name: Make deploy.sh executable
-        run: chmod +x $GITHUB_WORKSPACE/deploy_his.sh
-
-
       - name: LIST PWD31
-        run: pwd
+        run: cat $GITHUB_WORKSPACE/deploy_his.sh
         
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.3
