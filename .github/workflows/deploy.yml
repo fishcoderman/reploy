@@ -20,7 +20,7 @@ jobs:
         run: ls
 
       - name: LIST PWD31
-        run: cat ./deploy_his.sh
+        run: cat $GITHUB_WORKSPACE/index.html
         
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.3
