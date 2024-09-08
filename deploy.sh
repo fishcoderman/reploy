@@ -31,7 +31,7 @@ fi
 
 # 构建 Docker 镜像
 echo "Building Docker image..."
-
+cat ./Dockerfile
 docker build -t $IMAGE_NAME:latest -f ./Dockerfile .
 
 # 停止并移除旧的容器（如果存在）

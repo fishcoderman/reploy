@@ -1,11 +1,12 @@
 # 使用Node.js镜像构建Vue项目
 FROM node:16 AS build-stage
 
-# 设置npm源（例如使用淘宝源）
-RUN npm config set registry https://registry.npmmirror.com/
 
 # 设置工作目录
 WORKDIR /app
+
+# 设置npm源（例如使用淘宝源）
+RUN npm config set registry https://registry.npmmirror.com/
 
 # 复制package.json和package-lock.json
 COPY package.json .
