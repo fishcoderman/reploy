@@ -10,8 +10,7 @@ WORKDIR /app
 # 复制项目文件a'd's
 COPY package*.json ./
 RUN echo "当前npm版本：" && npm --version
-RUN rm package-lock.json
-RUN npm i
+RUN npm install --legacy-peer-deps
 COPY . .
 
 # 构建前端资源
