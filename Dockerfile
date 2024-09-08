@@ -1,5 +1,8 @@
 # 使用Node.js镜像构建Vue项目
-FROM node:latest
+FROM node:16 AS build-stage
+
+# 更新npm到最新版本
+RUN npm install -g npm@latest
 
 # 设置工作目录
 WORKDIR /app
