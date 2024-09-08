@@ -12,15 +12,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
-      - name: LIST PWD1
-        run: pwd
-
-      - name: List files
-        run: ls
-
-      - name: LIST PWD31
-        run: cat $GITHUB_WORKSPACE/deploy_his.sh
         
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.3
@@ -33,4 +24,4 @@ jobs:
   
       - name: Verify SSH connection
         run: |
-           ssh ${{ secrets.ALICLOUD_USER }}@${{ secrets.ALICLOUD_IP }} 'bash -s' < $GITHUB_WORKSPACE/deploy_his.sh
+           ssh ${{ secrets.ALICLOUD_USER }}@${{ secrets.ALICLOUD_IP }} 'bash -s' < $GITHUB_WORKSPACE/deploy.sh

@@ -6,7 +6,7 @@ echo "link server..."
 chmod +x "$0"
 
 # 定义变量
-REPO_URL="https://github.com/fishcoderman/fishcoderman.github.io.git"
+REPO_URL="https://github.com/fishcoderman/reploy.git"
 PROJECT_DIR="/project/vue"
 IMAGE_NAME="vue_image"
 CONTAINER_NAME="vue_container"
@@ -15,7 +15,6 @@ DOCKER_COMPOSE_PATH="."       # docker-compose.yml 所在路径
 
 # 更新代码
 cd /project || exit
-
 
 # 检查项目目录是否存在
 if [ ! -d "$PROJECT_DIR" ]; then
@@ -31,7 +30,8 @@ fi
 
 # 构建 Docker 镜像
 echo "Building Docker image..."
-docker build -t $IMAGE_NAME:latest -f $DOCKERFILE_PATH/Dockerfile $DOCKERFILE_PATH
+
+docker build -t vue_image:latest -f ./Dockerfile .
 
 # 停止并移除旧的容器（如果存在）
 if [ $(docker ps -q -f name=$CONTAINER_NAME) ]; then
@@ -42,7 +42,7 @@ fi
 
 # 运行新的容器
 echo "Running new container..."
-docker run -d --name $CONTAINER_NAME -p 80:80 $IMAGE_NAME:latest
+docker run -d --name $CONTAINER_NAME -p 3000:80 $IMAGE_NAME:latest
 
 # 可选：使用 docker-compose 进行管理
 # cd $DOCKER_COMPOSE_PATH
