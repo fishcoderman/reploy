@@ -9,7 +9,7 @@ WORKDIR /app
 
 # 复制项目文件a'd's
 COPY package*.json ./
-RUN npm install --lockfile-version 3
+RUN npm i --lockfile-version 3 --package-lock-only
 COPY . .
 
 # 构建前端资源
