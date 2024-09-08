@@ -26,12 +26,13 @@ else
     echo "Updating repository..."
     cd $PROJECT_DIR || exit
     git pull origin main
+    cd ./reploy
 fi
 
 # 构建 Docker 镜像
 echo "Building Docker image..."
 
-docker build -t vue_image:latest -f ./Dockerfile .
+docker build -t $IMAGE_NAME:latest -f ./Dockerfile .
 
 # 停止并移除旧的容器（如果存在）
 if [ $(docker ps -q -f name=$CONTAINER_NAME) ]; then
