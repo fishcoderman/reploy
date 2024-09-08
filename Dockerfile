@@ -1,6 +1,9 @@
 # 使用Node.js镜像构建Vue项目
 FROM node:16 AS build-stage
 
+# 设置npm源（例如使用淘宝源）
+ENV NPM_CONFIG_REGISTRY=https://registry.npm.taobao.org
+
 # 安装pnpm
 RUN npm install -g pnpm
 
