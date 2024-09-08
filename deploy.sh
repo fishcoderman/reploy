@@ -25,12 +25,14 @@ if [ ! -d "$PROJECT_DIR" ]; then
 else
     echo "Updating repository..."
     cd $PROJECT_DIR || exit
+    cd ./reploy || exit
     git pull origin main
-    cd ./reploy
+   
 fi
 
 # 构建 Docker 镜像
 echo "Building Docker image..."
+echo "pwd" pwd
 cat ./Dockerfile
 docker build -t $IMAGE_NAME:latest -f ./Dockerfile .
 
