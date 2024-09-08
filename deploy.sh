@@ -8,8 +8,8 @@ chmod +x "$0"
 # 定义变量
 REPO_URL="https://github.com/fishcoderman/reploy.git"
 PROJECT_DIR="/project/vue"
-IMAGE_NAME="vue_image"
-CONTAINER_NAME="vue_container"
+IMAGE_NAME="v_image"
+CONTAINER_NAME="v_container"
 DOCKERFILE_PATH="."  # Dockerfile 所在路径
 DOCKER_COMPOSE_PATH="."       # docker-compose.yml 所在路径
 
